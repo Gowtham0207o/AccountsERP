@@ -1,0 +1,48 @@
+/* Hera Constructions Dashboard Theme */
+
+:root {
+  --midnight: #04061A;
+  --deep-navy: #0A0F34;
+  --indigo-night: #0F174D;
+  --royal-indigo: #142270;
+  --electric-blue: #2844A8;
+  --glow-blue: #5A99FF;
+  --text-primary: #E6E9F4;
+  --text-muted: #9299B8;
+}
+
+.hera-bg {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--midnight), var(--deep-navy), var(--royal-indigo));
+}
+
+.sidebar {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--indigo-night), var(--deep-navy));
+}
+
+.brand {
+  color: var(--glow-blue);
+}
+
+.nav-link {
+  color: var(--text-muted);
+}
+
+.nav-link.active, .nav-link:hover {
+  color: var(--glow-blue);
+}
+
+.hera-card {
+  background: linear-gradient(160deg, var(--indigo-night), var(--deep-navy));
+  border: none;
+  box-shadow: 0 0 28px rgba(90,153,255,0.15);
+}
+
+.card p {
+  color: var(--text-muted);
+}
+
+.card h4 {
+  color: var(--text-primary);
+}
