@@ -1,68 +1,87 @@
 <?php
 
-class user
+class User
 {
-    /**
-     * Authenticate credentials (used ONLY by OAuth authorize endpoint)
-     */
-    public static function authenticate($email, $password)
-    {
-        $conn = database::get_connection();
+    private $db;
 
-        $stmt = $conn->prepare(
-            "SELECT id, password_hash 
+    public function __construct()
+    {
+        $this->db = Database::getInstance()->getConnection();
+    }
+
+    /* ---------- FIND USER ---------- */
+    public function findByEmail(string $email): ?array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT id, name, email, password_hash, is_active 
              FROM users 
-             WHERE email = ? AND is_active = 1"
+             WHERE email = ? 
+             LIMIT 1"
         );
         $stmt->bind_param("s", $email);
         $stmt->execute();
 
         $user = $stmt->get_result()->fetch_assoc();
+        return $user ?: null;
+    }
 
-        if (!$user || !password_verify($password, $user['password_hash'])) {
+    /* ---------- VERIFY PASSWORD ---------- */
+    public function verifyPassword(string $password, string $hash): bool
+    {
+        return password_verify($password, $hash);
+    }
+
+    /* ---------- GET USER ROLES ---------- */
+    public function getRoles(int $userId): array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT r.role_name
+             FROM roles r
+             INNER JOIN user_roles ur ON ur.role_id = r.id
+             WHERE ur.user_id = ?"
+        );
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+
+        return array_column($stmt->get_result()->fetch_all(MYSQLI_ASSOC), 'role_name');
+    }
+
+    /* ---------- LOGIN ---------- */
+    public function login(string $email, string $password): bool
+    {
+        $user = $this->findByEmail($email);
+
+        if (!$user || !$user['is_active']) {
             return false;
         }
 
-        return $user['id'];
+        if (!$this->verifyPassword($password, $user['password_hash'])) {
+            return false;
+        }
+
+        $roles = $this->getRoles($user['id']);
+
+        session_regenerate_id(true);
+
+        $_SESSION['auth'] = [
+            'id'    => $user['id'],
+            'name'  => $user['name'],
+            'email' => $user['email'],
+            'roles' => $roles
+        ];
+
+        $this->recordLogin($user['id']);
+
+        return true;
     }
 
-    /**
-     * Fetch user by ID (used by auth_guard)
-     */
-    public static function findById($userId)
+    /* ---------- LOGIN AUDIT ---------- */
+    private function recordLogin(int $userId): void
     {
-        $conn = database::get_connection();
-
-        $stmt = $conn->prepare(
-            "SELECT id, name, email 
-             FROM users 
-             WHERE id = ? AND is_active = 1"
+        $stmt = $this->db->prepare(
+            "UPDATE users SET last_login_at = NOW() WHERE id = ?"
         );
         $stmt->bind_param("i", $userId);
         $stmt->execute();
-
-        return $stmt->get_result()->fetch_assoc();
-    }
-
-    /**
-     * Fetch roles for RBAC
-     */
-    public static function getRoles($userId)
-    {
-        $conn = database::get_connection();
-
-        $stmt = $conn->prepare("
-            SELECT r.role_name
-            FROM roles r
-            JOIN user_roles ur ON ur.role_id = r.id
-            WHERE ur.user_id = ?
-        ");
-        $stmt->bind_param("i", $userId);
-        $stmt->execute();
-
-        return array_column(
-            $stmt->get_result()->fetch_all(MYSQLI_ASSOC),
-            'role_name'
-        );
     }
 }

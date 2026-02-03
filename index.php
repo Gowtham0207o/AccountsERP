@@ -1,85 +1,247 @@
-<?php
-require_once __DIR__ . '/libs/load.php';
-
-// 2️⃣ AUTHENTICATION
-require_once __DIR__ . '/auth/auth_guard.php';
-
-// 3️⃣ AUTHORIZATION
-require_once __DIR__ . '/auth/require_role.php';
-require_role_or_redirect(
-    ['Developer', 'Owner'],
-    '/accounts/test.php'
-);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Hera Constructions Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
+   <link href="assets/css/style.css" rel="stylesheet">
 </head>
+<body>
 
-<body class="hera-bg text-light">
-<h1>Welcome to Hera Accounts</h1>
-<p>User: <?= htmlspecialchars($GLOBALS['AUTH_USER']['name']) ?></p>
-<div class="container-fluid">
-  <div class="row">
-    
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="container-fluid">
+
     <!-- Sidebar -->
-    <nav class="col-md-2 d-none d-md-block sidebar p-3">
-      <h4 class="brand">Hera</h4>
-      <ul class="nav flex-column mt-4">
-        <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Accounts</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Expenses</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
-      </ul>
+    <nav class="sidebar">
+      <div>
+        <div class="logo">Hera Vault</div>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span class="icon">📊</span>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span class="icon">💳</span>
+              Accounts
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span class="icon">🏗️</span>
+              Projects
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span class="icon">💸</span>
+              Expenses
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span class="icon">📈</span>
+              Reports
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-text">
+        <p>© 2024 Hera Constructions</p>
+      </div>
     </nav>
 
-    <!-- Main -->
-    <main class="col-md-10 ms-sm-auto px-md-4 py-4">
-      <h2 class="mb-4">Dashboard</h2>
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <h1>Welcome back, Hera Team 👷‍♂️</h1>
+          <p>Here's your financial summary of the week</p>
+        </div>
+        <div class="header-right">
+          <div class="notification-btn">🔔</div>
+          <div class="date-picker">
+            <span>📅</span>
+            <span>April 14, 2024 - April 21, 2024</span>
+          </div>
+        </div>
+      </header>
 
-      <div class="row g-4">
-        <div class="col-md-3">
-          <div class="card hera-card">
-            <div class="card-body">
-              <p>Total Balance</p>
-              <h4>₹32,45,000</h4>
+      <!-- Chart Section with Metrics -->
+      <section class="chart-section">
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-icon balance">💰</div>
+            <div class="metric-label">Total Balance</div>
+            <div class="metric-value">₹32,495.24</div>
+            <div class="metric-change positive">+₹2,607.32 Since last week</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon income">📈</div>
+            <div class="metric-label">Income</div>
+            <div class="metric-value">₹12,904.17</div>
+            <div class="metric-change positive">+15.4%</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon expenses">📉</div>
+            <div class="metric-label">Expenses</div>
+            <div class="metric-value">₹5,846.12</div>
+            <div class="metric-change negative">-8.2%</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon transactions">✓</div>
+            <div class="metric-label">Transactions</div>
+            <div class="metric-value">142</div>
+            <div class="metric-change positive">+12.9%</div>
+          </div>
+        </div>
+
+        <div class="chart-area">
+          <div class="chart-placeholder">
+            <div class="chart-line">
+              <svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#3d5afe;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#6c8aff;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#82b1ff;stop-opacity:1" />
+                  </linearGradient>
+                  <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#6c8aff;stop-opacity:0.5" />
+                    <stop offset="100%" style="stop-color:#3d5afe;stop-opacity:0" />
+                  </linearGradient>
+                </defs>
+                <path class="chart-fill" d="M 0,150 L 0,120 Q 100,80 200,100 T 400,90 T 600,70 T 800,85 T 1000,60 L 1000,150 Z" />
+                <path class="chart-path" d="M 0,120 Q 100,80 200,100 T 400,90 T 600,70 T 800,85 T 1000,60" />
+                <circle class="chart-dot" cx="200" cy="100" r="6" fill="#6c8aff" style="animation-delay: 0.8s;">
+                  <animate attributeName="r" values="6;9;6" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle class="chart-dot" cx="600" cy="70" r="6" fill="#82b1ff" style="animation-delay: 1.2s;">
+                  <animate attributeName="r" values="6;9;6" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle class="chart-dot" cx="1000" cy="60" r="6" fill="#3d5afe" style="animation-delay: 1.6s;">
+                  <animate attributeName="r" values="6;9;6" dur="2s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card hera-card">
-            <div class="card-body">
-              <p>Income</p>
-              <h4>₹12,90,000</h4>
+      </section>
+
+      <!-- Bottom Panels -->
+      <div class="panels-grid">
+
+        <!-- Accounts Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h5 class="panel-title">Your Accounts</h5>
+            <a href="#" class="view-all">View All →</a>
+          </div>
+          <div class="accounts-grid">
+            <div class="account-card">
+              <div class="account-header">
+                <div class="account-logo">🏦</div>
+                <div class="account-menu">⋮</div>
+              </div>
+              <div class="account-name">CHASE</div>
+              <div class="account-balance">₹15,268.38</div>
+              <div class="account-details">
+                <span>Chase Bank - 3782</span>
+              </div>
+            </div>
+            <div class="account-card">
+              <div class="account-header">
+                <div class="account-logo">🏦</div>
+                <div class="account-menu">⋮</div>
+              </div>
+              <div class="account-name">Bank of America</div>
+              <div class="account-balance">₹10,526.12</div>
+              <div class="account-details">
+                <span>Chase Bank - 8120</span>
+                <span>--86.01</span>
+              </div>
+            </div>
+            <div class="account-card">
+              <div class="account-header">
+                <div class="account-logo">💳</div>
+                <div class="account-menu">⋮</div>
+              </div>
+              <div class="account-name">VISA</div>
+              <div class="account-balance">₹5,846.12</div>
+              <div class="account-details">
+                <span>Chase Bank - 9201</span>
+                <span>--36.07</span>
+              </div>
+            </div>
+            <div class="add-account-btn">
+              <span style="font-size: 1.5rem;">+</span>
+              <span>Add Account</span>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card hera-card">
-            <div class="card-body">
-              <p>Expenses</p>
-              <h4>₹5,84,000</h4>
+
+        <!-- Transactions Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h5 class="panel-title">Recent Transactions</h5>
+            <a href="#" class="view-all">View All →</a>
+          </div>
+          <div>
+            <div class="transaction-item">
+              <div class="transaction-left">
+                <div class="transaction-icon">🍎</div>
+                <div class="transaction-info">
+                  <div class="transaction-name">Crane Purchase (L&T)</div>
+                  <div class="transaction-date">Bank - 3782</div>
+                </div>
+              </div>
+              <div class="transaction-amount negative">-₹1,20,999</div>
+            </div>
+            <div class="transaction-item">
+              <div class="transaction-left">
+                <div class="transaction-icon">💳</div>
+                <div class="transaction-info">
+                  <div class="transaction-name">Payment Received - Client Omega</div>
+                  <div class="transaction-date">Bank - 9201</div>
+                </div>
+              </div>
+              <div class="transaction-amount positive">+₹5,00,000</div>
+            </div>
+            <div class="transaction-item">
+              <div class="transaction-left">
+                <div class="transaction-icon">🔧</div>
+                <div class="transaction-info">
+                  <div class="transaction-name">Material Supply - UltraTech</div>
+                  <div class="transaction-date">Bank - 2047</div>
+                </div>
+              </div>
+              <div class="transaction-amount negative">-₹49,999</div>
+            </div>
+            <div class="transaction-item">
+              <div class="transaction-left">
+                <div class="transaction-icon">🎮</div>
+                <div class="transaction-info">
+                  <div class="transaction-name">Architect Consultation</div>
+                  <div class="transaction-date">Bank - 3201</div>
+                </div>
+              </div>
+              <div class="transaction-amount positive">+₹1,99,999</div>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card hera-card">
-            <div class="card-body">
-              <p>Transactions</p>
-              <h4>142</h4>
-            </div>
-          </div>
-        </div>
+
       </div>
 
     </main>
   </div>
-</div>
 
 </body>
 </html>

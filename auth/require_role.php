@@ -1,5 +1,6 @@
 <?php
 
+require $_SERVER['DOCUMENT_ROOT'] . '/accounts/libs/load.php';
 function require_role_or_redirect(array $allowedRoles, $redirectTo)
 {
     $db = database::get_connection();

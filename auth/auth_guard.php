@@ -1,4 +1,5 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/accounts/libs/load.php';
 
 $header = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
 
