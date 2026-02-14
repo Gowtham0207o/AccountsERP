@@ -14,7 +14,7 @@ $error = $_GET['error'] ?? null;
  * After successful login, user will be redirected here
  * This is app-specific and MUST stay in the external app
  */
-$redirectTo = '/accounts/dashboard.php';
+$redirectTo = '/accounts/index.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +61,7 @@ $redirectTo = '/accounts/dashboard.php';
       <input
           type="hidden"
           name="redirect_to"
-          value="<?= htmlspecialchars($redirectTo, ENT_QUOTES) ?>"
+          value="<?= $redirectTo ?>"
       >
 
       <div class="neural-field">

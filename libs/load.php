@@ -16,3 +16,8 @@ function load_template($value)
 {
     include $_SERVER['DOCUMENT_ROOT'] . "/accounts/_templates/$value.php";
 }
+
+public static function isLoggedIn(): bool
+{
+    return Session::isset('auth_user');
+}
