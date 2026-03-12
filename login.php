@@ -1,20 +1,11 @@
 <?php
-/**
- * Accounts Login Page (UI ONLY)
- * -----------------------------
- * - Renders login UI
- * - Sends credentials to central auth system
- * - Does NOT validate passwords
- * - Does NOT create sessions
- */
-
 $error = $_GET['error'] ?? null;
 
 /**
  * After successful login, user will be redirected here
  * This is app-specific and MUST stay in the external app
  */
-$redirectTo = '/accounts/index.php';
+$redirectTo = '/accounts/dashboard.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +16,7 @@ $redirectTo = '/accounts/index.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Main stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/test.css">
 
     <!-- Optional font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">

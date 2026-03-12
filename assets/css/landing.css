@@ -1,0 +1,319 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Inter;
+background:#050714;
+color:#e8eaf6;
+overflow-x:hidden;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+padding:30px 80px;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:40px;
+}
+a{
+  text-decoration : none;
+  color : white;
+}
+.hero{
+padding:140px 80px;
+}
+
+.hero h1{
+font-size:60px;
+background:linear-gradient(135deg,#fff,#82b1ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero-buttons{
+margin-top:20px;
+/* display:flex; */
+gap:20px;
+}
+
+.btn{
+padding:14px 28px;
+border:1px solid #3d5afe;
+background:none;
+color:white;
+border-radius:10px;
+}
+
+.primary{
+background:#3d5afe;
+box-shadow:0 0 30px #3d5afe;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+padding:80px;
+}
+
+.card{
+background:#0f1535;
+padding:30px;
+border-radius:20px;
+}
+
+.modules{
+padding:80px;
+text-align:center;
+}
+
+.module-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-top:40px;
+}
+
+.module{
+background:#141b3d;
+padding:25px;
+border-radius:15px;
+}
+
+.workflow{
+padding:80px;
+text-align:center;
+}
+
+.steps{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-top:30px;
+}
+
+.pricing{
+padding:80px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.price-card{
+background:#141b3d;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.glow{
+box-shadow:0 0 40px #3d5afe;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#9fa8da;
+}
+
+/* BLOBS */
+
+.blob{
+position:absolute;
+border-radius:50%;
+filter:blur(100px);
+opacity:.7;
+}
+
+.b1{width:400px;height:400px;background:#3d5afe;top:100px;right:100px}
+.b2{width:300px;height:300px;background:#82b1ff;top:400px;right:300px}
+.b3{width:200px;height:200px;background:#00c3ff;top:600px;right:150px}
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 80px;
+  position:relative;
+}
+
+.hero-content{
+  width:45%;
+  z-index:5;
+}
+
+.hero-visual{
+  width:55%;
+  position:relative;
+  height:500px;
+}
+
+.hero-img{
+  width:420px;
+  position:absolute;
+  right:-10px;
+  top:0%;
+  transform:translateY(-50%);
+  animation:float 4s ease-in-out infinite;
+}
+
+/* FLOATING INFO CARDS */
+
+.float-card{
+  position:absolute;
+  background:rgba(20,27,61,.8);
+  border:1px solid rgba(108,138,255,.3);
+  padding:14px 20px;
+  border-radius:14px;
+  font-size:14px;
+  box-shadow:0 0 25px rgba(61,90,254,.4);
+  animation:float 5s infinite alternate;
+}
+
+.card-1{top:40px; right:260px;}
+.card-2{top:200px; right:420px;}
+.card-3{bottom:40px; right:300px;}
+
+@keyframes float{
+  from{transform:translateY(-10px)}
+  to{transform:translateY(10px)}
+}
+/* ============================
+   RESPONSIVE MASTER SYSTEM
+============================ */
+
+/* 4K SCREENS */
+
+@media (min-width: 1800px){
+
+.hero{
+  padding:0 180px;
+}
+
+.hero h1{
+  font-size:84px;
+}
+
+.hero p{
+  font-size:20px;
+}
+
+.hero-img{
+  width:520px;
+  right:180px;
+}
+
+.float-card{
+  font-size:16px;
+}
+
+}
+
+
+/* LAPTOP + DESKTOP */
+
+@media (max-width: 1400px){
+
+.hero h1{
+  font-size:56px;
+}
+
+.hero-img{
+  width:380px;
+}
+
+}
+
+
+/* TABLETS */
+
+@media (max-width: 1024px){
+
+.hero{
+  flex-direction:column;
+  text-align:center;
+  height:auto;
+  padding:140px 40px 80px;
+}
+
+.hero-content{
+  width:100%;
+}
+
+.hero-visual{
+  width:100%;
+  height:420px;
+  margin-top:60px;
+}
+
+.hero-img{
+  position:relative;
+  right:auto;
+  top:auto;
+  transform:none;
+  margin:auto;
+  display:block;
+}
+
+.float-card{
+  display:none;
+}
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px){
+
+nav{
+  padding:20px;
+}
+
+nav ul{
+  display:none;
+}
+
+.hero{
+  padding:120px 20px 60px;
+}
+
+.hero h1{
+  font-size:38px;
+}
+
+.hero p{
+  font-size:14px;
+}
+
+.hero-buttons{
+  flex-direction:column;
+}
+
+.btn{
+  width:100%;
+}
+
+.hero-img{
+  width:260px;
+  margin-top:40px;
+}
+
+}
+
+
+/* ULTRA SMALL */
+
+@media (max-width: 400px){
+
+.hero h1{
+  font-size:32px;
+}
+
+.hero-img{
+  width:220px;
+}
+
+}
